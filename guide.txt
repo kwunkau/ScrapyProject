@@ -1,0 +1,17 @@
+# 创建项目
+scrapy startproject qunar
+#记住这条命令在哪里文件就会创建在哪里
+
+# 创建 spiders  必须要在项目的目录的目录下
+cd qunar
+scrapy genspider hotel bnb.qunar.com
+
+#运行spiders
+scrapy genspiders name
+# 执行这条语句必须在 scrapy.cfg 同级的目录下
+#一个项目的组成
+	spiders  #这是一个包，爬虫所需要的逻辑
+	items.py #用于数据的处理（item对象），清洗，存储，验证，数据持久化
+	pipelines.py #与items一起使用
+	settings.py # 项目配置文件 ，如配置 pipelines的优先级，爬取速度
+	middlewares.py #用于spiders和引擎，Downloader和引擎，调度器和引擎之间。
