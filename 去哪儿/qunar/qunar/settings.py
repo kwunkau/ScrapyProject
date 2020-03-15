@@ -91,9 +91,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-# MONGODB 主机名
+#  主机名
 MYSQL_HOST = "192.168.0.20"
-# MONGODB 端口号
+#  端口号
 MYSQL_PORT = 3306
 # 数据库名称
 MYSQL_DBNAME = "crawler"
