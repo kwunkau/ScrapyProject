@@ -67,7 +67,7 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
    # 'qunar.pipelines.QunarPipeline': 300,
    'qunar.pipelines.PipelineToJson': 300,
-   'qunar.pipelines.PipelineToMysql': 300,
+   # 'qunar.pipelines.PipelineToMysql': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

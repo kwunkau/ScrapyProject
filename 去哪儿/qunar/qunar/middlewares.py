@@ -5,7 +5,9 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import pymysql
 from scrapy import signals
+from scrapy.utils.project import get_project_settings
 
 
 class QunarSpiderMiddleware(object):
@@ -101,3 +103,22 @@ class QunarDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+class QunarSpiderMiddlewareProxyIP(object):
+
+    def __init__(self):
+        settings = get_project_settings()
+        conn=pymysql.connect(host=settings['MYSQL_HOST'],user=settings['MYSQL_USER'],passwd=settings['MYSQL_PASSWD'],db=settings['MYSQL_DBNAME'])
+        cursor = conn.cursor()
+        ProxyIP = cursor.execute("select * from proxyIP")
+        self.IPPOOL = []
+        for row in cursor.fetchall():
+            ipinfo = {}
+            ipinfo['ipaddr'] = row[1] + ':' + row[2]
+            self.IPPOOL.append(ipinfo)
+
+
+    def process_request(self, request, spider):
+        thisip=random.choice(self.IPPOOL)
+        print("this is ip:"+thisip["ipaddr"])
+        request.meta["proxy"]="http://"+thisip["ipaddr"]
